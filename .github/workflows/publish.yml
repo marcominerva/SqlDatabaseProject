@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: mycommunityevents
-  AZURE_WEBAPP_PACKAGE_PATH: './published'
-  NETCORE_VERSION: '5.0.102'
   PROJECT_NAME: SqlDatabaseProject
   PROJETC_FILENAME: SqlDatabaseProject.sqlproj
   DACPAC_FILENAME: SqlDatabaseProject.dacpac
