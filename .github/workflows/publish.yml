@@ -18,11 +18,12 @@ jobs:
       uses: actions/checkout@v2
 
     # create dacpac using MSBUILD executable
-    - name: create dacpac
+    - name: Create dacpac
       run: |
           & 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe' '${{ env.PROJECT_NAME }}\${{ env.PROJECT_FILENAME }}' /p:Configuration=Release
     
-    - uses: azure/login@v1
+    - name: Azure Login
+      uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
@@ -40,6 +41,6 @@ jobs:
         arguments: '/p:IncludeCompositeObjects=true /p:BlockOnPossibleDataLoss=false'
         
     # Azure logout 
-    - name: logout
+    - name: Azure Logout
       run: |
-        az logout:  
+        az logout  
