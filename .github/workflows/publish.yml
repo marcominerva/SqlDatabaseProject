@@ -20,7 +20,7 @@ jobs:
     # create dacpac using MSBUILD executable
     - name: create dacpac
       run: |
-          & 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe' ${{ env.PROJECT_NAME }}\${{ env.PROJECT_FILENAME } /p:Configuration=Release
+          & 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe' '${{ env.PROJECT_NAME }}\${{ env.PROJECT_FILENAME }' /p:Configuration=Release
     
     # Use the Azure SQL Deploy Action
     - name: Azure SQL Deploy
