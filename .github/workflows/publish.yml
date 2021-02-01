@@ -7,7 +7,8 @@ env:
   AZURE_WEBAPP_NAME: mycommunityevents
   AZURE_WEBAPP_PACKAGE_PATH: './published'
   NETCORE_VERSION: '5.0.102'
-  PROJECT_NAME: SqlDatabaseProject\SqlDatabaseProject.sqlproj
+  PROJECT_NAME: SqlDatabaseProject
+  PROJETC_FILENAME: SqlDatabaseProject.sqlproj
   DACPAC_FILENAME: SqlDatabaseProject.dacpac
 
 jobs:
@@ -22,7 +23,7 @@ jobs:
     # create dacpac using MSBUILD executable
     - name: create dacpac
       run: |
-          & 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe' ${{ env.PROJECT_NAME }} /p:Configuration=Release
+          & 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe' ${{ env.PROJECT_NAME }}\${{ env.PROJECT_FILENAME } /p:Configuration=Release
     
     # Use the Azure SQL Deploy Action
     - name: Azure SQL Deploy
@@ -33,6 +34,6 @@ jobs:
         # The connection string, including authentication information for the Azure SQL Database 
         connection-string: '${{ secrets.CONNECTION_STRING }}'
         # Path to the dacpac file
-        dacpac-package: ${{ github.workspace }}\bin\Release\${{ env.DACPAC_FILENAME }}
+        dacpac-package: ${{ github.workspace }}\${{ env.PROJECT_NAME }}\bin\Release\${{ env.DACPAC_FILENAME }}
         # Additional arguments 
         arguments: '/p:IncludeCompositeObjects=true'   
