@@ -37,4 +37,9 @@ jobs:
         # Path to the dacpac file
         dacpac-package: '${{ github.workspace }}\${{ env.PROJECT_NAME }}\bin\Release\${{ env.DACPAC_FILENAME }}'
         # Additional arguments 
-        arguments: '/p:IncludeCompositeObjects=true /p:BlockOnPossibleDataLoss=false'   
+        arguments: '/p:IncludeCompositeObjects=true /p:BlockOnPossibleDataLoss=false'
+        
+    # Azure logout 
+    - name: logout
+      run: |
+        az logout:  
