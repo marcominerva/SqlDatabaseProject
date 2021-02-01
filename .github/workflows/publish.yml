@@ -5,7 +5,7 @@ on:
 
 env:
   PROJECT_NAME: SqlDatabaseProject
-  PROJETC_FILENAME: SqlDatabaseProject.sqlproj
+  PROJECT_FILENAME: SqlDatabaseProject.sqlproj
   DACPAC_FILENAME: SqlDatabaseProject.dacpac
 
 jobs:
@@ -18,11 +18,12 @@ jobs:
       uses: actions/checkout@v2
 
     # create dacpac using MSBUILD executable
-    - name: create dacpac
+    - name: Create dacpac
       run: |
           & 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe' '${{ env.PROJECT_NAME }}\${{ env.PROJECT_FILENAME }}' /p:Configuration=Release
     
-    - uses: azure/login@v1
+    - name: Azure Login
+      uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
@@ -37,4 +38,9 @@ jobs:
         # Path to the dacpac file
         dacpac-package: '${{ github.workspace }}\${{ env.PROJECT_NAME }}\bin\Release\${{ env.DACPAC_FILENAME }}'
         # Additional arguments 
-        arguments: '/p:IncludeCompositeObjects=true'   
+        arguments: '/p:IncludeCompositeObjects=true /p:BlockOnPossibleDataLoss=false'
+        
+    # Azure logout 
+    - name: Azure Logout
+      run: |
+        az logout  
