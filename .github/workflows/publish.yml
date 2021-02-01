@@ -5,7 +5,7 @@ on:
 
 env:
   PROJECT_NAME: SqlDatabaseProject
-  PROJETC_FILENAME: SqlDatabaseProject.sqlproj
+  PROJECT_FILENAME: SqlDatabaseProject.sqlproj
   DACPAC_FILENAME: SqlDatabaseProject.dacpac
 
 jobs:
