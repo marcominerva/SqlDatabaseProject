@@ -22,6 +22,10 @@ jobs:
       run: |
           & 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe' '${{ env.PROJECT_NAME }}\${{ env.PROJECT_FILENAME }}' /p:Configuration=Release
     
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
     # Use the Azure SQL Deploy Action
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
